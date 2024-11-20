@@ -4,14 +4,14 @@ import io from "socket.io-client";
 import ChatBox from "./components/ChatBox";
 import MessageInput from "./components/MessageInput";
 
-const socket = io("http://localhost:5000");
+const socket = io("https://global-chat-application-server.onrender.com");
 
 const App = () => {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/messages")
+      .get("https://global-chat-application-server.onrender.com/api/messages")
       .then((res) => setMessages(res.data))
       .catch((err) => console.error("Error fetching messages:", err));
 
@@ -26,7 +26,7 @@ const App = () => {
 
   const sendMessage = async (data) => {
     try {
-      await axios.post("http://localhost:5000/api/messages", data);
+      await axios.post("https://global-chat-application-server.onrender.com/api/messages", data);
 
       socket.emit("send_message", data);
     } catch (error) {
